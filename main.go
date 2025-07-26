@@ -206,7 +206,6 @@ func main() {
     response := BalanceResponse{
       Balance:    float64(balance.Balance),
       TotalMoney: float64(totalMoney),
-      CreatedAt:  balance.CreatedAt,
       UpdatedAt:  balance.UpdatedAt,
     }
     c.JSON(http.StatusOK, response)

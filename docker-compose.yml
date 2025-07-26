@@ -10,8 +10,11 @@ services:
       - db-store:/var/lib/postgresql/data
       - ./script:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=postgres
+      # もしくは、以下のように直接PostgreSQLの環境変数名を.envに書くことも可能です
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    env_file: # .env ファイルを読み込むことを明示的に記述します
+      - .env
 volumes:
   db-store:

@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   db:
@@ -12,6 +12,6 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=postgres # Corrected from POSTGRES_DBNANE
+      - POSTGRES_DB=postgres
 volumes:
   db-store:

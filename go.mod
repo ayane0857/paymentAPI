@@ -1,4 +1,4 @@
-module go-study
+module paymentAPI
 
 go 1.24.5
 

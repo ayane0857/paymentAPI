@@ -8,6 +8,8 @@ WORKDIR /app
 
 # go.mod, go.sum をコピーして依存解決
 COPY go.mod go.sum ./
+# Go Modules Proxyを明示
+ENV GOPROXY=https://proxy.golang.org,direct
 RUN go mod download
 
 # ソースコードをコピー

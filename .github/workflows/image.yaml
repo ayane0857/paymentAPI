@@ -8,6 +8,16 @@ jobs:
   BuildAndPush:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Go modules cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -26,7 +36,7 @@ jobs:
           password: ${{ secrets.HARBOR_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t registry.uniproject.jp/ayane/payment-api:${{ env.TAG_NAME }} .
+        run: docker build --progress=plain -t registry.uniproject.jp/ayane/payment-api:${{ env.TAG_NAME }} .
 
       - name: Push Docker image
         run: docker push registry.uniproject.jp/ayane/payment-api:${{ env.TAG_NAME }}

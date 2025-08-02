@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
+
 func GetBalance(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var balance models.Balance
@@ -28,6 +29,7 @@ func GetBalance(db *gorm.DB) gin.HandlerFunc {
 		c.JSON(http.StatusOK, response)
 	}
 }
+
 func PutBalance(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var balance models.Balance

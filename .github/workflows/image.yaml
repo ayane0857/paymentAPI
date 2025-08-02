@@ -26,7 +26,7 @@ jobs:
           password: ${{ secrets.HARBOR_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t registry.uniproject.jp/ayane/paymentAPI:${{ env.TAG_NAME }} .
+        run: docker build -t registry.uniproject.jp/ayane/payment-api:${{ env.TAG_NAME }} .
 
       - name: Push Docker image
-        run: docker push registry.uniproject.jp/ayane/paymentAPI:${{ env.TAG_NAME }}
+        run: docker push registry.uniproject.jp/ayane/payment-api:${{ env.TAG_NAME }}

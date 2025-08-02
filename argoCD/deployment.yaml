@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ayane-payment-api
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: ayane-payment-api
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ayane-payment-api
+    spec:
+      imagePullSecrets:
+        - name: internal-harbor
+      containers:
+        - name: app
+          image: registry.uniproject.jp/ayane/payment-api:0.1.7
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: default-port
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "2000m"
+            requests:
+              memory: "1Gi"
+              cpu: "100m"

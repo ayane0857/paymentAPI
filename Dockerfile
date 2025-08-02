@@ -1,12 +1,12 @@
-FROM golang:1.20-alpine
+FROM golang:1.20-alpine AS builder
 
-RUN mkdir -p /app
 # 必要なパッケージをインストール
 RUN apk add --no-cache git
 
+# 作業ディレクトリ作成
 WORKDIR /app
 
-# 依存関係ファイルをコピー
+# go.mod, go.sum をコピーして依存解決
 COPY go.mod go.sum ./
 RUN go mod download
 
@@ -16,6 +16,10 @@ COPY . .
 # アプリケーションをビルド
 RUN go build -o main .
 
-EXPOSE 8080
+# 実行用の軽量イメージ
+FROM alpine:latest
+WORKDIR /root/
+COPY --from=builder /app/main .
 
+EXPOSE 8080
 CMD ["./main"]

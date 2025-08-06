@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"os"
 	"strconv"
 
 	"paymentAPI/models"
@@ -56,6 +57,15 @@ func GetPayment(db *gorm.DB) gin.HandlerFunc {
 func PostPayment(db *gorm.DB) gin.HandlerFunc {
     return func(c *gin.Context) {
         var req models.PaymentRequest
+
+        // ヘッダーからtokenを取得
+		token := c.GetHeader("X-API-Token")
+		
+		if token != os.Getenv("API_PASSWORD") {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			return
+		}
+
         if err := c.ShouldBindJSON(&req); err != nil {
             c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request: " + err.Error()})
             return
@@ -89,6 +99,15 @@ func PostPayment(db *gorm.DB) gin.HandlerFunc {
 func PutPayment(db *gorm.DB) gin.HandlerFunc {
     return func(c *gin.Context) {
         var payment models.Payment
+
+		// ヘッダーからtokenを取得
+		token := c.GetHeader("X-API-Token")
+		
+		if token != os.Getenv("API_PASSWORD") {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			return
+		}
+
         id := c.Param("id")
 
         if err := db.First(&payment, id).Error; err != nil {
@@ -109,6 +128,15 @@ func PutPayment(db *gorm.DB) gin.HandlerFunc {
 func DeletePayment(db *gorm.DB) gin.HandlerFunc {
     return func(c *gin.Context) {
         var payment models.Payment
+
+		// ヘッダーからtokenを取得
+		token := c.GetHeader("X-API-Token")
+		
+		if token != os.Getenv("API_PASSWORD") {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			return
+		}
+
         id := c.Param("id")
 
         if err := db.First(&payment, id).Error; err != nil {

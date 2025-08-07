@@ -31,8 +31,45 @@ spec:
               memory: "1Gi"
               cpu: "100m"
           env:
-            - name: serviceDomain
+            - name: API_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: microcms-secret
-                  key: serviceDomain
+                  name: go-secret
+                  key: API_PASSWORD
+            - name: POSTGRES_HOST
+              value: "postgres"
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_DB
+              value: "payment_db"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: go-secret
+                  key: POSTGRES_USER
+        - name: postgres
+          image: postgres:17
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+              name: postgres
+          env:
+            - name: POSTGRES_DB
+              value: "payment_db"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: go-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: go-secret
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - name: postgres-persistent-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-persistent-storage
+          persistentVolumeClaim:
+            claimName: db

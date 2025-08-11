@@ -9,7 +9,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: /nfs/infra/ayane0857/paymentAPI
+    path: /nfs/users/ayane/paymentAPI
     server: nfs.unipro.infra
   claimRef:
     namespace: paymentAPI

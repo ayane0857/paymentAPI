@@ -4,7 +4,7 @@ metadata:
   name: paymentAPI-db
 spec:
   capacity:
-    storage: 5Gi
+    storage: 3Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -19,12 +19,13 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: db
+  namespace: ayane-payment-api
   labels:
     app: paymentAPI
 spec:
   resources:
     requests:
-      storage: 5Gi
+      storage: 3Gi
   accessModes:
     - ReadWriteMany
   volumeName: paymentAPI-db

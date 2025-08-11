@@ -37,7 +37,7 @@ spec:
                   name: go-secret
                   key: API_PASSWORD
             - name: POSTGRES_HOST
-              value: "postgres"
+              value: "localhost"
             - name: POSTGRES_PORT
               value: "5432"
             - name: POSTGRES_DB
@@ -68,8 +68,17 @@ spec:
                   key: POSTGRES_PASSWORD
           volumeMounts:
             - name: postgres-persistent-storage
-              mountPath: /var/lib/postgresql/data
+              mountPath: "/var/lib/postgresql/data"
+            - name: postgres-config-volume
+              mountPath: "/etc/postgresql/postgresql.conf"
+              subPath: postgresql.conf
+            - name: postgres-config-volume
+              mountPath: "/etc/postgresql/pg_hba.conf"
+              subPath: pg_hba.conf
       volumes:
         - name: postgres-persistent-storage
           persistentVolumeClaim:
             claimName: db
+        - name: postgres-config-volume
+          configMap:
+            name: postgres-config

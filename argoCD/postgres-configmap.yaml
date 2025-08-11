@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  postgresql.conf: |
+    # PostgreSQL 設定例
+    max_connections = 100
+    shared_buffers = 128MB
+    # 必要に応じて他の設定を追加
+  pg_hba.conf: |
+    # PostgreSQL Client Authentication Configuration File
+    local   all             all                                     trust
+    host    all             all             127.0.0.1/32            trust
+    host    all             all             ::1/128                 trust
+    # 必要に応じて他の設定を追加

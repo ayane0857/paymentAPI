@@ -27,7 +27,7 @@ func main() {
   dbName := os.Getenv("POSTGRES_DB")
   dbHost := "localhost" // または環境変数から取得
   dbPort := "5432"      // または環境変数から取得
-
+  log.Println("Connecting to database with user:", dbUser, "and db name:", dbName)
   dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Tokyo", dbHost, dbUser, dbPassword, dbName, dbPort)
 
   

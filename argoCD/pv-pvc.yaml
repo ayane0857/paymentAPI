@@ -9,19 +9,17 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""  # 空文字列でStorageClassなしを明示
   nfs:
     path: /nfs/users/ayane/payment-api
     server: nfs.unipro.infra
-  apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-  name: db
-  labels:
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: db
+  namespace: ayane-payment-api  # 名前空間を明示
   labels:
     app: payment-api
 spec:
@@ -30,4 +28,5 @@ spec:
       storage: 3Gi
   accessModes:
     - ReadWriteMany
+  storageClassName: ""  # PVと同じくStorageClassなしを明示
   volumeName: payment-api-db

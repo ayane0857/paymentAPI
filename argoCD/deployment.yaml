@@ -37,7 +37,7 @@ spec:
                   name: go-secret
                   key: API_PASSWORD
             - name: POSTGRES_HOST
-              value: "localhost"
+              value: "ayane-payment-api-db"
             - name: POSTGRES_PORT
               value: "5432"
             - name: POSTGRES_DB
@@ -47,6 +47,25 @@ spec:
                 secretKeyRef:
                   name: go-secret
                   key: POSTGRES_USER
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ayane-payment-api-db
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: ayane-payment-api-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ayane-payment-api-db
+    spec:
+      imagePullSecrets:
+        - name: internal-harbor
+      containers:
         - name: postgres
           image: postgres:17
           imagePullPolicy: Always

@@ -18,7 +18,7 @@ import (
 func main() {
   err := godotenv.Load()
   if err != nil {
-    log.Println("Error loading .env file")
+    log.Println("環境変数読み込まれんらしいよ...")
   }
 
    // 環境変数から接続情報を取得

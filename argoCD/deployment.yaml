@@ -47,6 +47,11 @@ spec:
                 secretKeyRef:
                   name: go-secret
                   key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: go-secret
+                  key: POSTGRES_PASSWORD
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -90,6 +90,10 @@ spec:
                 secretKeyRef:
                   name: go-secret
                   key: POSTGRES_PASSWORD
+            - name: TZ
+              value: "Asia/Tokyo"
+            - name: PGTZ
+              value: "Asia/Tokyo"
           volumeMounts:
             - name: postgres-persistent-storage
               mountPath: "/var/lib/postgresql/data"

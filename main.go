@@ -28,7 +28,7 @@ func main() {
   dbHost := os.Getenv("POSTGRES_HOST") // または環境変数から取得
   dbPort := "5432"      // または環境変数から取得
   log.Println("Connecting to database with user:", dbUser, "and db name:", dbName)
-  dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Tokyo", dbHost, dbUser, dbPassword, dbName, dbPort)
+  dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", dbHost, dbUser, dbPassword, dbName, dbPort)
 
   
   db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})

@@ -5,17 +5,14 @@ metadata:
   name: app-ingress
   labels:
     name: app-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
-    - host: paymentapi.ayane0857.net
+    - host: api.ayane0857.net
       http:
         paths:
           - pathType: Prefix
-            path: "/"
+            path: /payment
             backend:
               service:
                 name: ayane-payment-api

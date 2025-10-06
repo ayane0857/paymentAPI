@@ -62,7 +62,8 @@ func main() {
     AllowHeaders:     []string{"Origin", "Content-Type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization"},
     AllowCredentials: true,
   }))
-
+  r.GET("/", handlers.GetHome(db))
+  
   r.GET("/payments", handlers.GetPayments(db))
   r.GET("/payments/:id", handlers.GetPayment(db))
 

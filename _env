@@ -1,4 +1,5 @@
 POSTGRES_USER="postgres"
 POSTGRES_PASSWORD="password"
 POSTGRES_DB="postgres"
+POSTGRES_HOST="localhost"
 API_PASSWORD="password"

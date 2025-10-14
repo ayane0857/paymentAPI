@@ -14,7 +14,7 @@ func GetHome(db *gorm.DB) gin.HandlerFunc {
 		userAgent := c.GetHeader("User-Agent")
 		if isBrowser(userAgent) {
 			// ブラウザの場合はリダイレクト
-			c.Redirect(http.StatusMovedPermanently, "https://api.ayane0857.net/docs/payment-api/")
+			c.Redirect(http.StatusMovedPermanently, "https://docs.ayane0857.net/")
 			return
 		}
 
